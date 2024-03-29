@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Security Demonstration Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .output {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .graph {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Security Demonstration Results</h1>
+    <div class="container">
+        <h2>Output:</h2>
+        <pre class="output">{{ text_output }}</pre>
+        <div class="graph">
+            <h2>Graphical Analysis:</h2>
+            <img src="{{ url_for('serve_graph', filename=graph_file) }}" alt="Graphical Analysis">
+        </div>
+    </div>
+</body>
+
+</html>

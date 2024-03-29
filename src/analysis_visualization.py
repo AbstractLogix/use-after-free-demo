@@ -6,8 +6,18 @@ Contents: Analysis functions, result summarization, and optional visualization t
 import matplotlib.pyplot as plt
 
 
-# Example function for saving a graph
-def save_graph(data):
+def save_graph(data, filename):
+    """
+    Generate a simple bar chart indicating the presence or absence of a vulnerability.
+    'data' is a list with a single boolean value, where True indicates vulnerability/mitigation.
+    """
+    labels = ["Vulnerable", "Mitigated"]
+    values = [
+        1 - data[0],
+        data[0],
+    ]  # Assuming 'data' is [1] for mitigated and [0] for vulnerable
+
     plt.figure()
-    plt.plot(data)
-    plt.savefig("/app/graphs/my_graph.png")  # Save to the mounted volume directory
+    plt.bar(labels, values, color=["red", "green"])
+    plt.title("Vulnerability Analysis")
+    plt.savefig(f"/app/graphs/{filename}")  # Save to the mounted volume directory

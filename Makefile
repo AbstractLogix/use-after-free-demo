@@ -6,11 +6,8 @@ CONTAINER_NAME := use-after-free-demo-container
 .PHONY: help
 help:
 	@echo "Available commands:"
-	@echo "	 setup			  - Setting up project directories for storing graphs"
 	@echo "  build            - Building Docker image $(IMAGE_NAME)"
 	@echo "  run              - Running $(CONTAINER_NAME) with volume mapping for graph output"
-	@echo "  clean-container  - Stopping and removing the Docker container $(CONTAINER_NAME) (if running)"
-	@echo "  clean-image      - Removing the Docker image $(IMAGE_NAME)"
 	@echo "  clean            - Clean up all artifacts created by this Makefile, including generated graphs"
 
 # Creates project directory for storying graphs
@@ -21,15 +18,16 @@ setup:
 
 # Build the Docker image
 .PHONY: build
-build:
+build: setup
 	@echo "Building Docker image $(IMAGE_NAME)..."
 	docker build -t $(IMAGE_NAME) .
 
-# Run the Docker container with volume mapping for graph output
+# Run the Docker container with volume mapping for graph output and port mapping
 .PHONY: run
 run:
 	@echo "Running $(CONTAINER_NAME)..."
 	docker run --rm --name $(CONTAINER_NAME) \
+	-p 5000:5000 \
 	-v $(PWD)/graphs:/app/graphs \
 	$(IMAGE_NAME)
 
