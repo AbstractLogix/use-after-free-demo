@@ -26,7 +26,7 @@ build: setup
 .PHONY: run
 run:
 	@echo "Running $(CONTAINER_NAME)..."
-	docker run --rm --name $(CONTAINER_NAME) \
+	docker run --restart=always --name $(CONTAINER_NAME) \
 	-p 5000:5000 \
 	-v $(PWD)/graphs:/app/graphs \
 	$(IMAGE_NAME)

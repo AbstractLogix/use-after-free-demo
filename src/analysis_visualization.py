@@ -15,7 +15,7 @@ def save_graph(data, filename):
     values = [
         1 - data[0],
         data[0],
-    ]  # Assuming 'data' is [1] for mitigated and [0] for vulnerable
+    ] 
 
     plt.figure()
     plt.bar(labels, values, color=["red", "green"])

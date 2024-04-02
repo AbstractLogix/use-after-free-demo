@@ -88,5 +88,16 @@ def serve_graph(filename):
     return send_from_directory(GRAPHS_DIR, filename)
 
 
+@app.route("/crash-report")
+def crash_report():
+    try:
+        with open("/path/to/persistent_volume/crash_log.txt", "r") as f:
+            crash_output = f.read()
+    except FileNotFoundError:
+        crash_output = "No crash report found."
+
+    return render_template("result.html", crash_output=crash_output)
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
