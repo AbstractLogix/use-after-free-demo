@@ -44,6 +44,11 @@ def index():
     return render_template("index.html")
 
 
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template("error.html"), 500
+
+
 @app.route("/login", methods=["POST"])
 def login():
     username = request.form["username"]
@@ -59,13 +64,7 @@ def login():
 @app.route("/trigger-vulnerability")
 def trigger_vulnerability():
     app.logger.info("Triggering vulnerability")
-    output = demonstrate_vulnerability()
-    is_vulnerable = "after free:" in output.lower()
-    av.save_graph([int(is_vulnerable)], "vulnerability_graph.png")
-    clear_file_content(VULNERABILITY_OUTPUT_FILE)
-    return render_template(
-        "result.html", text_output=output, graph_file="vulnerability_graph.png"
-    )
+    demonstrate_vulnerability()
 
 
 @app.route("/trigger-mitigation")

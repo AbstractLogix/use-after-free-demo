@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Error</title>
+    <script>
+        // Redirect to home after 10 seconds to allow for container restart
+        setTimeout(function () {
+            window.location.href = "/";
+        }, 10000);
+    </script>
+    <style>
+        .button {
+            /* Reuse the button styles from index.html */
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        .button:hover {
+            background-color: #3e8e41
+        }
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+
+<body>
+    <p>The application encountered an error. You will be redirected to the homepage shortly.</p>
+    <p>If you are not automatically redirected, <a href="/">click here</a> to return to the homepage.</p>
+    </div>
+</body>
+
+</html>
