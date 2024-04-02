@@ -88,15 +88,20 @@ def serve_graph(filename):
     return send_from_directory(GRAPHS_DIR, filename)
 
 
-@app.route("/crash-report")
-def crash_report():
-    try:
-        with open("/path/to/persistent_volume/crash_log.txt", "r") as f:
-            crash_output = f.read()
-    except FileNotFoundError:
-        crash_output = "No crash report found."
+@app.route("/analyze-leaks")
+def analyze_leaks():
+    log_file = "/app/logs/container_output.log"
+    output_file = "leak_summary.png"
 
-    return render_template("result.html", crash_output=crash_output)
+    # Parse the AddressSanitizer log and generate a summary chart
+    leaks = av.parse_asan_output(log_file)
+    av.generate_leak_summary_chart(leaks, f"/app/graphs/{output_file}")
+
+    # Clear the log file after analysis
+    open(log_file, "w").close()
+
+    # Display the result
+    return render_template("analysis_result.html", graph_file=output_file)
 
 
 if __name__ == "__main__":

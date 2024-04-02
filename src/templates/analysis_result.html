@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Memory Leak Analysis Results</h2>
+        <p>This chart summarizes the top memory leaks detected by AddressSanitizer, highlighting the sources responsible
+            for the most significant leaks.</p>
+        <!-- Image for the leak summary chart -->
+        {% if graph_file %}
+        <div class="text-center">
+            <img src="{{ url_for('serve_graph', filename=graph_file) }}" alt="Leak Summary Chart" class="img-fluid">
+        </div>
+        {% else %}
+        <p>No analysis data available.</p>
+        {% endif %}
+        <a href="/" class="btn btn-primary mt-3">Go Back</a>
+    </div>
+</body>
+
+</html>
