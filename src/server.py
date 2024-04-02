@@ -44,9 +44,14 @@ def index():
     return render_template("index.html")
 
 
-@app.errorhandler(500)
+@app.errorhandler(503)
 def internal_error(error):
-    return render_template("error.html"), 500
+    return render_template("error.html"), 503
+
+
+@app.route("/error")
+def error():
+    return render_template("error.html")
 
 
 @app.route("/login", methods=["POST"])
@@ -65,6 +70,7 @@ def login():
 def trigger_vulnerability():
     app.logger.info("Triggering vulnerability")
     demonstrate_vulnerability()
+    return "Triggered vulnerability, server crashing...", 200
 
 
 @app.route("/trigger-mitigation")

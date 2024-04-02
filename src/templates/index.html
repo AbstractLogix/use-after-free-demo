@@ -5,17 +5,16 @@
     <title>Use-After-Free Vulnerability Demo</title>
     <script>
         function triggerVulnerability() {
+            // Wait a few seconds for the container to restart, then redirect
+            setTimeout(() => {
+                window.location.href = "/error";
+            }, 10);
             // Send a request to trigger the vulnerability
             fetch('/trigger-vulnerability').then(() => {
                 console.log('Vulnerability triggered.');
             }).catch((error) => {
                 console.error('Error:', error);
             });
-
-            // Wait a few seconds for the container to restart, then redirect
-            setTimeout(() => {
-                window.location.href = "/";
-            }, 5000);
         }
     </script>
     <style>
