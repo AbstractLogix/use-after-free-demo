@@ -15,6 +15,7 @@ help:
 setup:
 	@echo "Setting up project directories..."
 	mkdir -p graphs
+	mkdir -p logs
 
 # Build the Docker image
 .PHONY: build
@@ -29,7 +30,8 @@ run:
 	docker run --restart=always --name $(CONTAINER_NAME) \
 	-p 5000:5000 \
 	-v $(PWD)/graphs:/app/graphs \
-	$(IMAGE_NAME)
+	-v $(PWD)/logs:/app/logs \
+	$(IMAGE_NAME) > ./logs/container_output.log 2>&1
 
 # Stop and remove the Docker container (if running)
 .PHONY: clean-container
@@ -49,4 +51,6 @@ clean-image:
 clean: clean-container clean-image
 	@echo "Removing generated graphs..."
 	rm -rf graphs
+	@echo "Removing logs..."
+	rm -rf logs
 	@echo "Cleanup complete."
