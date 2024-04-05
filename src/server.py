@@ -54,18 +54,6 @@ def error():
     return render_template("error.html")
 
 
-@app.route("/login", methods=["POST"])
-def login():
-    username = request.form["username"]
-    password = request.form["password"]
-    # Placeholder for authentication logic
-    # WARNING: This example does not include secure authentication practices
-    if username == "admin" and password == "password":
-        return "Login Successful"
-    else:
-        return "Login Failed", 401
-
-
 @app.route("/trigger-vulnerability")
 def trigger_vulnerability():
     app.logger.info("Triggering vulnerability")
